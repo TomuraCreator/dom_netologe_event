@@ -1,5 +1,4 @@
 [![текущее состояние](https://ci.appveyor.com/api/projects/status/8nx7injxf5emvv8e?svg=true)]
-[![SVG branch image URL](https://ci.appveyor.com/api/projects/status/8nx7injxf5emvv8e/branch/master?svg=true)]
 
 # Домашнее задание к занятию "2. DOM"
 

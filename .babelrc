@@ -1,5 +1,5 @@
 { // fromthe polyfill
-	"plugin": [
+	"plugins": [
 		"@babel/syntax-dynamic-import"
 	],
 	"env": {
@@ -9,14 +9,16 @@
 			]
 		}
 	},
-	"presete": [
-		"@babel/preset-env",
-		{
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
 			"useBuiltIns": "usage",
 			"corejs": 3,
 			"targets": {
 				"node": "18.14.1"
 			}
 		}
+	]
 	]
 }
