@@ -70,13 +70,13 @@ module.exports = {
 		// Add your plugins here
 		// Learn more about plugins from https://webpack.js.org/configuration/plugins/
 
-		// new HtmlWebpackPlugin({
-		// 	template: "./src/index.html",
-		// 	filename: "./index.html",
-		// 	minify: {
-		// 		collapseWhitespace: false,
-		// 	}
-		// }),
+		new HtmlWebpackPlugin({
+			template: "./src/index.html",
+			filename: "./index.html",
+			minify: {
+				collapseWhitespace: false,
+			}
+		}),
 	],
 
 	resolve: {
