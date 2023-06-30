@@ -1,0 +1,22 @@
+{ // fromthe polyfill
+	"plugin": [
+		"@babel/syntax-dynamic-import"
+	],
+	"env": {
+		"test": {
+			"plugins": [
+				"@babel/plugin-transform-modules-commonjs"
+			]
+		}
+	},
+	"presete": [
+		"@babel/preset-env",
+		{
+			"useBuiltIns": "usage",
+			"corejs": 3,
+			"targets": {
+				"node": "18.14.1"
+			}
+		}
+	]
+}
