@@ -54,9 +54,8 @@ export class GamingInGobline extends Main {
 		let max: undefined | number;
 		this.insert_tableInto_page();
 
-		let tbl!: HTMLTableElement
-		let row!: HTMLCollectionOf<HTMLTableRowElement>
-		let td!: HTMLCollectionOf<HTMLTableCellElement>;
+		let tbl!: HTMLTableElement;
+		let row!: HTMLCollectionOf<HTMLTableRowElement>;
 
 		let row_len: number = 0
 		let td_len: number = 0
@@ -64,22 +63,16 @@ export class GamingInGobline extends Main {
 
 		tbl = document.getElementsByTagName("table")[0]
 		row = tbl.getElementsByTagName('tr')
-
-		// while (col < int) {
-
 		let setId = setInterval(() => {
 
 			row_len = Math.floor(Math.random() * row.length)
-
 			td_len = Math.floor(Math.random() * row[row_len].cells.length)
 
-
-			if (row[row_len].cells[td_len].innerHTML === '') {
+			if (row[row_len].cells[td_len].innerHTML === '' && this.int !== 0) {
 				row[row_len].cells[td_len].innerHTML = this.create_html_goblin()
 				this.col += 1
 				setTimeout(() => row[row_len].cells[td_len].innerHTML = '', 1000)
 			}
-			console.log('row_len: ' + String(row_len), td_len)
 			this.stopInterval(setId);
 
 		}, 1300)
@@ -88,7 +81,7 @@ export class GamingInGobline extends Main {
 	}
 
 	stopInterval(ind: any) {
-		if (this.col === this.int) {
+		if (this.col === this.int || this.int === 0) {
 
 			clearInterval(ind);
 		}

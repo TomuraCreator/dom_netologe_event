@@ -2,3 +2,8 @@ body {
 	cursor: url('../pic/molo70t.png') 1 4, auto;
 	height: 100vh;
 }
+td {
+	height: 30px;
+	width: 30px;
+	border: 1px solid #cdd
+}
