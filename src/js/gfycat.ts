@@ -46,7 +46,7 @@ export class GamingInGobline extends Main {
 
 	insert_tableInto_page(): void {
 		let t!: HTMLElement;
-		t = document.getElementsByTagName("div")[0] as HTMLElement
+		t = document.getElementById('game') as HTMLElement
 		t.innerHTML = this.table
 	}
 
@@ -77,12 +77,12 @@ export class GamingInGobline extends Main {
 			if (row[row_len].cells[td_len].innerHTML === '') {
 				row[row_len].cells[td_len].innerHTML = this.create_html_goblin()
 				this.col += 1
-				setTimeout(() => row[row_len].cells[td_len].innerHTML = '', 800)
+				setTimeout(() => row[row_len].cells[td_len].innerHTML = '', 1000)
 			}
 			console.log('row_len: ' + String(row_len), td_len)
 			this.stopInterval(setId);
 
-		}, 1000)
+		}, 1300)
 
 		return setId
 	}
@@ -97,6 +97,4 @@ export class GamingInGobline extends Main {
 }
 
 
-let block;
-block = new GamingInGobline(6);
-block.start_game()
+

@@ -5,6 +5,10 @@ const TsconfigPathPlugin = require("tsconfig-paths-webpack-plugin");
 const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin"); // https://webpack.js.org/plugins/copy-webpack-plugin/
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+
 //Node:  HtmlWebpackPlugin() - расскоментировать чтоб запустить webpack.dev.js
 //Node:  HtmlWebpackPlugin() - закоментировать чтоб запустить webpack.prod.js
 
@@ -14,7 +18,10 @@ module.exports = {
 	mode: 'none',
 	target: 'web',
 	entry: "./src/index.js",
-
+	stats: {
+		errorDetails: true,
+		children: true
+	},
 	output: {
 		path: path.resolve(__dirname, "dist"),
 	},
@@ -24,7 +31,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.ts$/i,
-				exclude: /node_modules/,
+				exclude: [/node_modules/, /index.js/],
 				use: "ts-loader",
 
 			},
@@ -36,6 +43,12 @@ module.exports = {
 				],
 			},
 			{
+				test: /\.css$/i,
+				exclude: /node_modules/,
+				sideEffects: true,
+				use: [MiniCssExtractPlugin.loader, 'css-loader']
+			},
+			{
 				test: /\.html$/,
 				use: [
 					{
@@ -45,7 +58,8 @@ module.exports = {
 			},
 			{
 				test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-				type: "asset/ressource",
+				type: "asset",
+
 			},
 
 			// Add your rules for custom modules here
@@ -63,12 +77,14 @@ module.exports = {
 				}
 			]
 		}),
-
 		new TsconfigPathPlugin({
-			configFile: "./tsconfig.json"
+			configFile: "./tsconfig-for-webpack-config.json"
 		}),
 		// Add your plugins here
 		// Learn more about plugins from https://webpack.js.org/configuration/plugins/
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+		}),
 
 		new HtmlWebpackPlugin({
 			template: "./src/index.html",
@@ -78,7 +94,11 @@ module.exports = {
 			}
 		}),
 	],
-
+	optimization: {
+		minimizer: [
+			new CssMinimizerPlugin(),
+		],
+	},
 	resolve: {
 		extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
 
