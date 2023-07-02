@@ -6,7 +6,6 @@ class Main {
 	}
 
 	create_html_table(): void {
-		let bodyTable: string = ``;
 		this.table = `
 		<table>
 		<tr id="row1">
@@ -31,11 +30,12 @@ class Main {
 export class GamingInGobline extends Main {
 	static div: HTMLElement;
 	setId: any
-	col: number
+	display_goblin: number
 	int: number
+
 	constructor(int: number) {
 		super();
-		this.col = 0;
+		this.display_goblin = 0;
 		this.int = int
 
 	}
@@ -51,43 +51,31 @@ export class GamingInGobline extends Main {
 	}
 
 	start_game() {
-		let max: undefined | number;
-		this.insert_tableInto_page();
-
 		let tbl!: HTMLTableElement;
 		let row!: HTMLCollectionOf<HTMLTableRowElement>;
 
-		let row_len: number = 0
-		let td_len: number = 0
-
-
+		// indexes
+		let row_ind: number = 0
+		let td_ind: number = 0
 		tbl = document.getElementsByTagName("table")[0]
 		row = tbl.getElementsByTagName('tr')
-		let setId = setInterval(() => {
 
-			row_len = Math.floor(Math.random() * row.length)
-			td_len = Math.floor(Math.random() * row[row_len].cells.length)
+		// Geting indexes from rows and cells
+		row_ind = Math.floor(Math.random() * row.length)
+		td_ind = Math.floor(Math.random() * row[row_ind].cells.length)
 
-			if (row[row_len].cells[td_len].innerHTML === '' && this.int !== 0) {
-				row[row_len].cells[td_len].innerHTML = this.create_html_goblin()
-				this.col += 1
-				setTimeout(() => row[row_len].cells[td_len].innerHTML = '', 1000)
-			}
-			this.stopInterval(setId);
+		// goblin is reappearance and it's reappearance remove
+		if (row[row_ind].cells[td_ind].innerHTML === '' && this.int !== 0) {
+			row[row_ind].cells[td_ind].innerHTML = this.create_html_goblin()
 
-		}, 1300)
-
-		return setId
-	}
-
-	stopInterval(ind: any) {
-		if (this.col === this.int || this.int === 0) {
-
-			clearInterval(ind);
+			this.display_goblin += 1 // it's tottal count of displayed goblin
+			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 900)
 		}
 	}
 
+	stopInterval(ind: any) {
+		if (this.display_goblin === this.int || this.int === 0) {
+			clearInterval(ind);
+		}
+	}
 }
-
-
-

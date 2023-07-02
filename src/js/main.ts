@@ -1,35 +1,31 @@
-function stopGame() {
-	clearInterval(game);
-}
 
+let max_view_goblin: number = 10;
 const { GamingInGobline } = require('./gfycat');
 const { LiveCounter } = require('./counters');
 let block: any;
-block = new GamingInGobline(8);
-block.start_game()
+
+block = new GamingInGobline(max_view_goblin); // this's a gfycat file
+block.insert_tableInto_page();
 
 
-let live = new LiveCounter();
-live.start_work()
+let live = new LiveCounter(); // this's a counters file
+live.start_work();
+let liv_count = live.liveCount();
 
 
+let gameId = setInterval(() => {
+	block.start_game();
 
-document.addEventListener('', (e) => {
-	if (e.type === 'mousedown') {
+	liv_count; //it's returning the working with the event from the counter file
 
+	if (block.display_goblin > 1 && live.stop_count === 0 && live.click_count > 0) block.display_goblin = 0;
+	if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
+		clearInterval(gameId);
+		block.int = 0
 	}
+	live.integer = 0;
+}, 1800) // and plus second timer is into the gfycat file
 
-	// 	live.liveCount(e);
-})
-let game = setInterval(() => {
-	console.log('4444: ' + String(document.onclick));
-
-	if (live.trueFalse === true) {
-
-		block.int = 0;
-		stopGame();
-	}
-}, 500)
 
 
 
