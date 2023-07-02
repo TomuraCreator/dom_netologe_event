@@ -58,28 +58,33 @@ export class LiveCounter extends Counter {
 	liveCount() {
 		let html_: string;
 		this.div = document.querySelector('#game') as HTMLDivElement;
-		let click = 0;
+		let click = 0; // this's a protaction for the souble-click
 
 		let integ: number = 0;
-		return this.div.addEventListener('click', (e: any) => {
-			this.click_count += 1
-			e.currentTarget
-			if (click === 0) {
-				click = this.click_count;
-				integ = this.listenerItemImg(e);
+
+		return () => {
+			click = 0
+			this.div.addEventListener('click', (e: any) => {
+				this.click_count += 1;
 				e.currentTarget;
 
-				if (integ === 0) {
-					this.stop_count += 1
-				} else if (integ === 1) {
-					this.stop_count = 0;
-					this.val += 1;
-					html_ = `<div><span>Балы: </span>${this.val}</div>`;
-					this.upDataHthlCounter(html_);
+				if (click === 0) {
+					click = this.click_count;
+					integ = this.listenerItemImg(e);
+					e.currentTarget;
+
+					if (integ === 0) {
+						this.stop_count += 1
+					} else if (integ === 1) {
+						this.stop_count = 0;
+						this.val += 1;
+						html_ = `<div><span>Балы: </span>${this.val}</div>`;
+						this.upDataHthlCounter(html_);
+					};
+
+					integ = 0;
 				};
-				click = 0
-				integ = 0;
-			}
 		})
+		}
 	}
 }

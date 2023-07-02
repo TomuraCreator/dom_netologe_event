@@ -16,7 +16,7 @@ let liv_count = live.liveCount();
 let gameId = setInterval(() => {
 	block.start_game();
 
-	liv_count; //it's returning the working with the event from the counter file
+	liv_count(); //it's returning the working with the event from the counter file
 
 	if (block.display_goblin > 1 && live.stop_count === 0 && live.click_count > 0) block.display_goblin = 0;
 	if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
