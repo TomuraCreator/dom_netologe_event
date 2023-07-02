@@ -62,7 +62,6 @@ export class LiveCounter extends Counter {
 		let html_: string;
 		t = document.querySelector('#game') as HTMLDivElement;
 
-		// this.stop_count - как - то от его измененний значений отталкиваться надо
 
 		t.addEventListener('mousedown', e => {
 			let integ: number = this.listenerItemImg(e);
