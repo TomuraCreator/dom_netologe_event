@@ -6,7 +6,6 @@ class Main {
 	}
 
 	create_html_table(): void {
-		let bodyTable: string = ``;
 		this.table = `
 		<table>
 		<tr id="row1">
@@ -29,13 +28,11 @@ class Main {
 }
 
 export class GamingInGobline extends Main {
-
-
-
 	static div: HTMLElement;
 	setId: any
 	display_goblin: number
 	int: number
+
 	constructor(int: number) {
 		super();
 		this.display_goblin = 0;
@@ -57,34 +54,28 @@ export class GamingInGobline extends Main {
 		let tbl!: HTMLTableElement;
 		let row!: HTMLCollectionOf<HTMLTableRowElement>;
 
+		// indexes
 		let row_ind: number = 0
 		let td_ind: number = 0
 		tbl = document.getElementsByTagName("table")[0]
 		row = tbl.getElementsByTagName('tr')
 
-		// Geting indexes
+		// Geting indexes from rows and cells
 		row_ind = Math.floor(Math.random() * row.length)
 		td_ind = Math.floor(Math.random() * row[row_ind].cells.length)
 
 		// goblin is reappearance and it's reappearance remove
 		if (row[row_ind].cells[td_ind].innerHTML === '' && this.int !== 0) {
 			row[row_ind].cells[td_ind].innerHTML = this.create_html_goblin()
-			this.display_goblin += 1
-			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 1800)
-			// }
 
-
+			this.display_goblin += 1 // it's tottal count of displayed goblin
+			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 900)
 		}
 	}
 
 	stopInterval(ind: any) {
 		if (this.display_goblin === this.int || this.int === 0) {
-
 			clearInterval(ind);
 		}
 	}
-
 }
-
-
-

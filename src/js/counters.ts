@@ -1,9 +1,7 @@
-import { type } from "os";
-import { stringify } from "querystring";
-
 class Counter {
 	counter!: string;
 	val: number;
+
 	constructor() {
 		this.counter = '';
 		this.val = 0;
@@ -17,9 +15,9 @@ class Counter {
 	}
 
 	divElement(selector: string) {
-
 		return document.querySelector(selector) as HTMLDivElement
 	}
+
 	insertHtmlCounter(): void {
 		let t!: HTMLDivElement
 		t = this.divElement('#game')
@@ -42,17 +40,17 @@ class Counter {
 export class LiveCounter extends Counter {
 	trueFalse: boolean;
 	stop_count: number;
-	div: any
-	// upDataHthlCounter_proport: any
+	div: any;
+	click_count: number;
+
 	constructor() {
 		super()
 		this.trueFalse = false
 		this.stop_count = 0;
+		this.click_count = 0;
 	}
 
 	listenerItemImg(e: any): number {
-
-		console.log('LEN: ', e.target)
 		if (e.target.tagName === 'IMG') return 1
 		return 0
 	}
@@ -60,35 +58,28 @@ export class LiveCounter extends Counter {
 	liveCount() {
 		let html_: string;
 		this.div = document.querySelector('#game') as HTMLDivElement;
+		let click = 0;
 
 		let integ: number = 0;
 		return this.div.addEventListener('click', (e: any) => {
-			console.log('e.turget1: ', e.target.tagName)
+			this.click_count += 1
 			e.currentTarget
-			integ = this.listenerItemImg(e);
-			console.log('e.turget2: ', e.target.tagName)
-			e.currentTarget
+			if (click === 0) {
+				click = this.click_count;
+				integ = this.listenerItemImg(e);
+				e.currentTarget;
 
-			if (integ === 0) {
-				this.stop_count += 1
-			} else if (integ === 1) {
-				this.stop_count = 0;
-				this.val += 1;
-				html_ = `<div><span>Балы: </span>${this.val}</div>`;
-				this.upDataHthlCounter(html_);
-			};
-
-			// if (this.stop_count === 5) this.trueFalse = true;
-
-			// ;
-
-
+				if (integ === 0) {
+					this.stop_count += 1
+				} else if (integ === 1) {
+					this.stop_count = 0;
+					this.val += 1;
+					html_ = `<div><span>Балы: </span>${this.val}</div>`;
+					this.upDataHthlCounter(html_);
+				};
+				click = 0
+				integ = 0;
+			}
 		})
-		// })()
-
-
 	}
-
-
-
 }
