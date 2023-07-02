@@ -1,3 +1,5 @@
+import { type } from "os";
+import { stringify } from "querystring";
 
 class Counter {
 	counter!: string;
@@ -43,7 +45,7 @@ export class LiveCounter extends Counter {
 	constructor() {
 		super()
 		this.trueFalse = false
-		this.stop_count = 0;
+		this.stop_count = -1;
 	}
 
 	listenerItemImg(e: any): number {
@@ -55,19 +57,20 @@ export class LiveCounter extends Counter {
 		return 0
 	}
 
-	liveCount(): void {
+	liveCount(e: any) {
 		let t: HTMLDivElement;
 		let html_: string;
-		// let stop_count: number = 0;
-
 		t = document.querySelector('#game') as HTMLDivElement;
-		// console.log(t.addEventListener('mousedown'))
+
+		// this.stop_count - как - то от его измененний значений отталкиваться надо
+
 		t.addEventListener('mousedown', e => {
 			let integ: number = this.listenerItemImg(e);
 
 			(integ === 0) ? this.stop_count += 1 : this.stop_count = 0;
 			if (this.stop_count === 5) this.trueFalse = true;
 
+				// update the counter is html-page
 			this.val += integ;
 			html_ = `<div><span>Балы: </span>${this.val}</div>`;
 			this.upDataHthlCounter(html_)
@@ -75,5 +78,7 @@ export class LiveCounter extends Counter {
 
 
 	}
+
+
 
 }
