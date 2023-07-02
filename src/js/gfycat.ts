@@ -29,6 +29,9 @@ class Main {
 }
 
 export class GamingInGobline extends Main {
+
+
+
 	static div: HTMLElement;
 	setId: any
 	col: number
@@ -51,33 +54,27 @@ export class GamingInGobline extends Main {
 	}
 
 	start_game() {
-		let max: undefined | number;
-		this.insert_tableInto_page();
-
 		let tbl!: HTMLTableElement;
 		let row!: HTMLCollectionOf<HTMLTableRowElement>;
 
-		let row_len: number = 0
-		let td_len: number = 0
-
-
+		let row_ind: number = 0
+		let td_ind: number = 0
 		tbl = document.getElementsByTagName("table")[0]
 		row = tbl.getElementsByTagName('tr')
-		let setId = setInterval(() => {
 
-			row_len = Math.floor(Math.random() * row.length)
-			td_len = Math.floor(Math.random() * row[row_len].cells.length)
+		// Geting indexes
+		row_ind = Math.floor(Math.random() * row.length)
+		td_ind = Math.floor(Math.random() * row[row_ind].cells.length)
 
-			if (row[row_len].cells[td_len].innerHTML === '' && this.int !== 0) {
-				row[row_len].cells[td_len].innerHTML = this.create_html_goblin()
-				this.col += 1
-				setTimeout(() => row[row_len].cells[td_len].innerHTML = '', 1000)
-			}
-			this.stopInterval(setId);
+		// goblin is reappearance and it's reappearance remove
+		if (row[row_ind].cells[td_ind].innerHTML === '' && this.int !== 0) {
+			row[row_ind].cells[td_ind].innerHTML = this.create_html_goblin()
+			this.col += 1
+			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 700)
+			// }
 
-		}, 1300)
 
-		return setId
+		}
 	}
 
 	stopInterval(ind: any) {

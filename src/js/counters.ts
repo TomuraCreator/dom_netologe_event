@@ -42,10 +42,12 @@ class Counter {
 export class LiveCounter extends Counter {
 	trueFalse: boolean;
 	stop_count: number;
+	div: any
+	upDataHthlCounter_proport: any
 	constructor() {
 		super()
 		this.trueFalse = false
-		this.stop_count = -1;
+		this.stop_count = 0;
 	}
 
 	listenerItemImg(e: any): number {
@@ -57,23 +59,27 @@ export class LiveCounter extends Counter {
 		return 0
 	}
 
-	liveCount(e: any) {
-		let t: HTMLDivElement;
+	liveCount() {
+
 		let html_: string;
-		t = document.querySelector('#game') as HTMLDivElement;
+		this.div = document.querySelector('#game') as HTMLDivElement;
+		// this.div = (() => { return this.div })().bind(this)
 
+		//
+		let upDataHthlCounter_proport: any = this.upDataHthlCounter.bind(this)
+		// return (function () {
+		let div_: any = upDataHthlCounter_proport.div;
+		div_.addEventListener('mousedown', (e: any) => {
+			let integ: number = upDataHthlCounter_proport.listenerItemImg(e);
 
-		t.addEventListener('mousedown', e => {
-			let integ: number = this.listenerItemImg(e);
+			(integ === 0) ? upDataHthlCounter_proport.stop_count += 1 : upDataHthlCounter_proport.stop_count = 0;
+			if (upDataHthlCounter_proport.stop_count === 5) upDataHthlCounter_proport.trueFalse = true;
 
-			(integ === 0) ? this.stop_count += 1 : this.stop_count = 0;
-			if (this.stop_count === 5) this.trueFalse = true;
-
-				// update the counter is html-page
-			this.val += integ;
-			html_ = `<div><span>Балы: </span>${this.val}</div>`;
-			this.upDataHthlCounter(html_)
+			upDataHthlCounter_proport.val += integ;
+			html_ = `<div><span>Балы: </span>${upDataHthlCounter_proport.val}</div>`;
+			upDataHthlCounter_proport(html_)
 		})
+		// })()
 
 
 	}
