@@ -34,11 +34,11 @@ export class GamingInGobline extends Main {
 
 	static div: HTMLElement;
 	setId: any
-	col: number
+	display_goblin: number
 	int: number
 	constructor(int: number) {
 		super();
-		this.col = 0;
+		this.display_goblin = 0;
 		this.int = int
 
 	}
@@ -69,8 +69,8 @@ export class GamingInGobline extends Main {
 		// goblin is reappearance and it's reappearance remove
 		if (row[row_ind].cells[td_ind].innerHTML === '' && this.int !== 0) {
 			row[row_ind].cells[td_ind].innerHTML = this.create_html_goblin()
-			this.col += 1
-			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 700)
+			this.display_goblin += 1
+			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 1800)
 			// }
 
 
@@ -78,7 +78,7 @@ export class GamingInGobline extends Main {
 	}
 
 	stopInterval(ind: any) {
-		if (this.col === this.int || this.int === 0) {
+		if (this.display_goblin === this.int || this.int === 0) {
 
 			clearInterval(ind);
 		}

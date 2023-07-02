@@ -12,23 +12,25 @@ block.insert_tableInto_page();
 
 
 let live = new LiveCounter();
-live.start_work()
-
-console.log('You are loser! # 1');
+live.start_work();
+let liv_count = live.liveCount();
 
 let gameId = setInterval(() => {
 	console.log('You are loser! # 2');
 	block.start_game();
+	liv_count;
 
-	live.liveCount()
 	// console.log('upDataHthlCounter_proport.stop_count: ',)
-	// console.log('------->> ', block.col, ' && ', block.int)
-	if (block.col === max_view_goblin) {
+	console.log('----block.display_goblin-->> ', block.display_goblin)
+	if (block.display_goblin > 1 && live.stop_count === 0) block.display_goblin = 0;
+	console.log('stop_count: ', live.stop_count)
+	console.log('live.val: ', live.val)
+	if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
 		clearInterval(gameId);
 	}
-}, 700)
+}, 1700)
 // block.stopInterval(gameId);
-clearInterval(gameId);
+// clearInterval(gameId);
 
 // document.addEventListener('', (e) => {
 // 	console.log('e.type: ', e.type)

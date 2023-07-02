@@ -43,7 +43,7 @@ export class LiveCounter extends Counter {
 	trueFalse: boolean;
 	stop_count: number;
 	div: any
-	upDataHthlCounter_proport: any
+	// upDataHthlCounter_proport: any
 	constructor() {
 		super()
 		this.trueFalse = false
@@ -51,33 +51,38 @@ export class LiveCounter extends Counter {
 	}
 
 	listenerItemImg(e: any): number {
-		if (e.target.tagName === 'IMG') {
-			e.currentTarget
-			return 1
-		}
-		e.stopImmediatePropagation()
+
+		console.log('LEN: ', e.target)
+		if (e.target.tagName === 'IMG') return 1
 		return 0
 	}
 
 	liveCount() {
-
 		let html_: string;
 		this.div = document.querySelector('#game') as HTMLDivElement;
-		// this.div = (() => { return this.div })().bind(this)
 
-		//
-		let upDataHthlCounter_proport: any = this.upDataHthlCounter.bind(this)
-		// return (function () {
-		let div_: any = upDataHthlCounter_proport.div;
-		div_.addEventListener('mousedown', (e: any) => {
-			let integ: number = upDataHthlCounter_proport.listenerItemImg(e);
+		let integ: number = 0;
+		return this.div.addEventListener('click', (e: any) => {
+			console.log('e.turget1: ', e.target.tagName)
+			e.currentTarget
+			integ = this.listenerItemImg(e);
+			console.log('e.turget2: ', e.target.tagName)
+			e.currentTarget
 
-			(integ === 0) ? upDataHthlCounter_proport.stop_count += 1 : upDataHthlCounter_proport.stop_count = 0;
-			if (upDataHthlCounter_proport.stop_count === 5) upDataHthlCounter_proport.trueFalse = true;
+			if (integ === 0) {
+				this.stop_count += 1
+			} else if (integ === 1) {
+				this.stop_count = 0;
+				this.val += 1;
+				html_ = `<div><span>Балы: </span>${this.val}</div>`;
+				this.upDataHthlCounter(html_);
+			};
 
-			upDataHthlCounter_proport.val += integ;
-			html_ = `<div><span>Балы: </span>${upDataHthlCounter_proport.val}</div>`;
-			upDataHthlCounter_proport(html_)
+			// if (this.stop_count === 5) this.trueFalse = true;
+
+			// ;
+
+
 		})
 		// })()
 
