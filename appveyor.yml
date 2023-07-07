@@ -7,8 +7,6 @@ image:
 
 platform:
   - x64
-  # - x86
-  # - amd64
 
 init:
   - git config --global core.autocrlf input
@@ -28,17 +26,14 @@ deploy: off
 
 branches:
   only:
-    - v1
+    - master
 
 artifacts:
   - path: '\dist/to/file.exe\'
 
 
-after_build:
+build_script:
   - yarn run build
-  - yarn run lint
-  - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-
 deploy_script:  # скрипт развёртывания
 # Конкретно шаг развертывания выполняется вот этим скриптом:
 # deploy_script: # скрипт развёртывания
