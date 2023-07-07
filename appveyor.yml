@@ -8,9 +8,6 @@ image:
 platform:
   - x64
 
-init:
-  - git config --global core.autocrlf input
-
 stack: node 18.12.0
 
 cache:
