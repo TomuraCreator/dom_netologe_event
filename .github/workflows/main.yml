@@ -1,5 +1,5 @@
 
-
+name: dom_netologe_event
 on: [push, pull_request]
 
 # Down scope as necessary via https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
