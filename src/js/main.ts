@@ -13,7 +13,10 @@ live.start_work();
 let liv_count = live.liveCount();
 
 
-let gameId = setInterval(() => {
+let gameId: string | number | NodeJS.Timer | undefined;
+
+function gameIntervals() {
+	gameId = setInterval(() => {
 	block.start_game();
 
 	liv_count(removeImgAfterClick); //it's returning the working with the event from the counter file
@@ -27,14 +30,23 @@ let gameId = setInterval(() => {
 }, 1800)
 // and plus second timer is into the gfycat file
 
-
+};
+gameIntervals();
 
 function removeImgAfterClick(): void {
+	/**
+	 * TODO: click event is a triger to deleting an img
+	 */
 	const tds = document.getElementsByTagName('td');
 	for (let i = 0; i < tds.length; i++) {
 		const img = tds[i].getElementsByTagName('img')[0];
 
-		if (img !== null && img !== undefined) img.remove() as any;
+		if (img !== null && img !== undefined) {
+			img.remove() as any;
+
+			clearInterval(gameId); // stop interval
+			gameIntervals(); // restsrt interval
+		};
 	}
 
 }
