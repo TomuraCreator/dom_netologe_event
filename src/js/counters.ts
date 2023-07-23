@@ -62,11 +62,17 @@ export class LiveCounter extends Counter {
 
 		let integ: number = 0;
 
-		return () => {
+		return (fn: Function = () => { }) => {
 			click = 0
 			this.div.addEventListener('click', (e: any) => {
+				const eventTarget = e.target;
+				const img = document.getElementsByTagName('img')[0];
+
+				if (eventTarget === img) fn();
+
 				this.click_count += 1;
 				e.currentTarget;
+
 
 				if (click === 0) {
 					click = this.click_count;
@@ -80,10 +86,13 @@ export class LiveCounter extends Counter {
 						this.val += 1;
 						html_ = `<div><span>Балы: </span>${this.val}</div>`;
 						this.upDataHthlCounter(html_);
+
 					};
 
 					integ = 0;
 				};
+
+
 		})
 		}
 	}

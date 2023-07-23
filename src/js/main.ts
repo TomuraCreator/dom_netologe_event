@@ -16,7 +16,7 @@ let liv_count = live.liveCount();
 let gameId = setInterval(() => {
 	block.start_game();
 
-	liv_count(); //it's returning the working with the event from the counter file
+	liv_count(removeImgAfterClick); //it's returning the working with the event from the counter file
 
 	if (block.display_goblin > 1 && live.stop_count === 0 && live.click_count > 0) block.display_goblin = 0;
 	if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
@@ -26,3 +26,15 @@ let gameId = setInterval(() => {
 	live.integer = 0;
 }, 1800)
 // and plus second timer is into the gfycat file
+
+
+
+function removeImgAfterClick(): void {
+	const tds = document.getElementsByTagName('td');
+	for (let i = 0; i < tds.length; i++) {
+		const img = tds[i].getElementsByTagName('img')[0];
+
+		if (img !== null && img !== undefined) img.remove() as any;
+	}
+
+}
