@@ -26,8 +26,3 @@ let gameId = setInterval(() => {
 	live.integer = 0;
 }, 1800)
 // and plus second timer is into the gfycat file
-
-
-
-
-

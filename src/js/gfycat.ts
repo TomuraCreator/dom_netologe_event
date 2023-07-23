@@ -47,8 +47,29 @@ export class GamingInGobline extends Main {
 	insert_tableInto_page(): void {
 		let t!: HTMLElement;
 		t = document.getElementById('game') as HTMLElement
-		t.innerHTML = this.table
+		t.insertAdjacentHTML('beforeend', this.table)
+		// t.innerHTML = this.table
 	}
+
+	// get targetEventClick(): Promise<void> {
+	// 	return (async () => {
+	// 		const td = await document.querySelectorAll('td');
+	// 		let img: HTMLElement;
+	// 		if (td !== undefined) {
+	// 			for (let i = 0; i < td.length; i++) {
+	// 				img = await td.length[i].querySelector('img');
+	// 				img !== undefined ? await img.addEventListener('click', () => {
+	// 					img.remove();
+	// 				}) : null;
+	// 			};
+
+
+	// 		}
+	// 		// for (let i = 0; i < td.length; i++){
+
+	// 		// }
+	// 	})()
+	// }
 
 	start_game() {
 		let tbl!: HTMLTableElement;
@@ -66,10 +87,12 @@ export class GamingInGobline extends Main {
 
 		// goblin is reappearance and it's reappearance remove
 		if (row[row_ind].cells[td_ind].innerHTML === '' && this.int !== 0) {
-			row[row_ind].cells[td_ind].innerHTML = this.create_html_goblin()
+			row[row_ind].cells[td_ind].insertAdjacentHTML('beforeend', this.create_html_goblin())
 
 			this.display_goblin += 1 // it's tottal count of displayed goblin
-			setTimeout(() => row[row_ind].cells[td_ind].innerHTML = '', 900)
+			const td = row[row_ind].cells[td_ind] as HTMLElement;
+			const img = td.querySelector('img') as HTMLElement;
+			setTimeout(() => td.removeChild(img), 900);
 		}
 	}
 
