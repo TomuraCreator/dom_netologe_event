@@ -5,11 +5,11 @@ const { LiveCounter } = require('./counters');
 let block: any;
 
 block = new GamingInGobline(max_view_goblin); // this's a gfycat file
-block.insert_tableInto_page();
+block.insertTableIntoPage();
 
 
 let live = new LiveCounter(); // this's a counters file
-live.start_work();
+live.startWork();
 let liv_count = live.liveCount();
 
 
@@ -17,16 +17,16 @@ let gameId: string | number | NodeJS.Timer | undefined;
 
 function gameIntervals() {
 	gameId = setInterval(() => {
-	block.start_game();
+		block.startGame();
 
-	liv_count(removeImgAfterClick); //it's returning the working with the event from the counter file
+		liv_count(removeImgAfterClick); //it's returning the working with the event from the counter file
 
-	if (block.display_goblin > 1 && live.stop_count === 0 && live.click_count > 0) block.display_goblin = 0;
-	if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
-		clearInterval(gameId);
-		block.int = 0
-	}
-	live.integer = 0;
+		if (block.display_goblin > 1 && live.stop_count === 0 && live.click_count > 0) block.display_goblin = 0;
+		if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
+			clearInterval(gameId);
+			block.int = 0
+		}
+		live.integer = 0;
 }, 1800)
 // and plus second timer is into the gfycat file
 

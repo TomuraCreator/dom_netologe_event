@@ -30,7 +30,7 @@ class Counter {
 		t.getElementsByTagName('div')[1].innerHTML = data_
 	}
 
-	start_work() {
+	startWork() {
 		this.insertHtmlCounter()
 	}
 

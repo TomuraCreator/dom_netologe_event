@@ -2,10 +2,10 @@ class Main {
 	table!: string;
 	constructor() {
 		this.table;
-		this.create_html_table();
+		this.createHtmlTable();
 	}
 
-	create_html_table(): void {
+	createHtmlTable(): void {
 		this.table = `
 		<table>
 		<tr id="row1">
@@ -40,20 +40,18 @@ export class GamingInGobline extends Main {
 
 	}
 
-	create_html_goblin(): string {
+	createHtmlGoblin(): string {
 		return "<img src='../../pic/goblin.png'>"
 	}
 
-	insert_tableInto_page(): void {
+	insertTableIntoPage(): void {
 		let t!: HTMLElement;
 		t = document.getElementById('game') as HTMLElement
 		t.insertAdjacentHTML('beforeend', this.table)
 		// t.innerHTML = this.table
 	}
 
-
-
-	start_game() {
+	startGame() {
 		let tbl!: HTMLTableElement;
 		let row!: HTMLCollectionOf<HTMLTableRowElement>;
 
@@ -69,7 +67,7 @@ export class GamingInGobline extends Main {
 
 		// goblin is reappearance and it's reappearance remove
 		if (row[row_ind].cells[td_ind].innerHTML === '' && this.int !== 0) {
-			row[row_ind].cells[td_ind].insertAdjacentHTML('beforeend', this.create_html_goblin())
+			row[row_ind].cells[td_ind].insertAdjacentHTML('beforeend', this.createHtmlGoblin())
 
 			this.display_goblin += 1 // it's tottal count of displayed goblin
 			const td = row[row_ind].cells[td_ind] as HTMLElement;
