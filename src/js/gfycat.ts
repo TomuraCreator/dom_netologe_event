@@ -41,7 +41,7 @@ export class GamingInGobline extends Main {
 	}
 
 	create_html_goblin(): string {
-		return "<img src='./pic/goblin.png'>"
+		return "<img src='../../pic/goblin.png'>"
 	}
 
 	insert_tableInto_page(): void {
