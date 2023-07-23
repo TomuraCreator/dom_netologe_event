@@ -51,25 +51,7 @@ export class GamingInGobline extends Main {
 		// t.innerHTML = this.table
 	}
 
-	// get targetEventClick(): Promise<void> {
-	// 	return (async () => {
-	// 		const td = await document.querySelectorAll('td');
-	// 		let img: HTMLElement;
-	// 		if (td !== undefined) {
-	// 			for (let i = 0; i < td.length; i++) {
-	// 				img = await td.length[i].querySelector('img');
-	// 				img !== undefined ? await img.addEventListener('click', () => {
-	// 					img.remove();
-	// 				}) : null;
-	// 			};
 
-
-	// 		}
-	// 		// for (let i = 0; i < td.length; i++){
-
-	// 		// }
-	// 	})()
-	// }
 
 	start_game() {
 		let tbl!: HTMLTableElement;
@@ -92,7 +74,14 @@ export class GamingInGobline extends Main {
 			this.display_goblin += 1 // it's tottal count of displayed goblin
 			const td = row[row_ind].cells[td_ind] as HTMLElement;
 			const img = td.querySelector('img') as HTMLElement;
-			setTimeout(() => td.removeChild(img), 900);
+
+
+			setTimeout(() => {
+				if (img !== null && img !== undefined) {
+					img.remove()
+				}
+			}, 900);
+
 		}
 	}
 
