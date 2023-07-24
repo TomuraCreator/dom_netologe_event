@@ -54,7 +54,7 @@ for (let i = 0; i < goblin_class_active.tds.length; i++) {
 			goblin_class_active.setLiveCounter = count;
 			count++;
 			clearInterval(live_gibline);
-			start_game()ж
+			start_game()
 		}
 	});
 }
