@@ -11,3 +11,11 @@ td img {
 	height: 122px;
 	width: 122px;
 }
+td.active {
+	background: url('../pic/goblin.png') no-repeat left top;
+
+}
+
+td.active:active {
+	background-color: #cdd;
+}

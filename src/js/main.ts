@@ -1,52 +1,60 @@
 
-let max_view_goblin: number = 10;
-const { GamingInGobline } = require('./gfycat');
-const { LiveCounter } = require('./counters');
-let block: any;
 
-block = new GamingInGobline(max_view_goblin); // this's a gfycat file
-block.insertTableIntoPage();
-
-
-let live = new LiveCounter(); // this's a counters file
-live.startWork();
-let liv_count = live.liveCount();
-
-
-let gameId: string | number | NodeJS.Timer | undefined;
-
-function gameIntervals() {
-	gameId = setInterval(() => {
-		block.startGame();
-
-		liv_count(removeImgAfterClick); //it's returning the working with the event from the counter file
-
-		if (block.display_goblin > 1 && live.stop_count === 0 && live.click_count > 0) block.display_goblin = 0;
-		if (block.display_goblin === 5 || live.stop_count === 5 || live.val === 5) {
-			clearInterval(gameId);
-			block.int = 0
-		}
-		live.integer = 0;
-}, 1800)
-// and plus second timer is into the gfycat file
-
-};
-gameIntervals();
-
-function removeImgAfterClick(): void {
-	/**
-	 * TODO: click event is a triger to deleting an img
-	 */
-	const tds = document.getElementsByTagName('td');
-	for (let i = 0; i < tds.length; i++) {
-		const img = tds[i].getElementsByTagName('img')[0];
-
-		if (img !== null && img !== undefined) {
-			img.remove() as any;
-
-			clearInterval(gameId); // stop interval
-			gameIntervals(); // restsrt interval
-		};
+class Gobline {
+	tds: HTMLCollectionOf<HTMLTableCellElement>
+	constructor() {
+		this.tds = document.getElementsByTagName('td') as HTMLCollectionOf<HTMLTableCellElement>;
 	}
 
+	get getRandom() {
+		// делаем произвольное число - индекс для ичейки
+		return Math.floor(Math.random() * this.tds.length);
+	}
+
+	set setAppendGoblin(ind: number) {
+
+		this.tds[ind].classList.add('active');
+	}
+
+	set setRemoveGoblin(td: HTMLTableCellElement) {
+		td.classList.remove('active');
+	}
+
+	set setLiveCounter(int: number) {
+		//счетчик
+		const counter = document.querySelector('.counter .count span:last-of-type') as HTMLElement;
+		counter.innerHTML = String(int + 1);
+
+	}
+}
+
+
+const goblin_class_active = new Gobline();
+let live_gibline: any;
+const start_game = () => {
+	live_gibline = setInterval(() => {
+
+		goblin_class_active.setAppendGoblin = goblin_class_active.getRandom as number;
+		if (document.getElementsByClassName('active').length > 0) {
+			setTimeout(() => {
+				goblin_class_active.setRemoveGoblin = document.getElementsByClassName('active')[0] as HTMLTableCellElement;
+			}, 700);
+		}
+	}, 1700);
+}
+
+
+start_game();
+
+let count = 0;
+for (let i = 0; i < goblin_class_active.tds.length; i++) {
+	goblin_class_active.tds[i].addEventListener('click', (e: Event) => {
+
+		if (e.target === document.querySelector('.active')) {
+			goblin_class_active.setLiveCounter = count;
+			count++;
+			clearInterval(live_gibline);
+			start_game()ж
+		}
+	});
 }
