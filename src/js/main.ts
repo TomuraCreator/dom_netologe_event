@@ -1,9 +1,9 @@
-
-
-class Gobline {
-	tds: HTMLCollectionOf<HTMLElement>;
-	constructor() {
-		this.tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLElement>;
+class Controller {
+	private interval: NodeJS.Interval;
+	private lastIndex: number;
+	
+	constructor(readonly cells: NodeList<HTMLElement>, private score: ScoreBlock) {
+		this.initListener();
 	}
 
 	get getRandom() {
@@ -11,50 +11,57 @@ class Gobline {
 		return Math.floor(Math.random() * this.tds.length);
 	}
 
-	set setAppendGoblin(ind: number) {
-
-		this.tds[ind].classList.add('active');
+	setGoblinByIndex(index: number) {
+		this.cells[index].classList.add('active');
 	}
 
-	set setRemoveGoblin(td: HTMLElement) {
-		td.classList.remove('active');
+	removeGoblinByIndex(index: number) {
+		this.cells[index].classList.remove('active');
 	}
 
-	set setLiveCounter(int: number) {
-		//счетчик
-		const counter = document.querySelector('.counter .count span:last-of-type') as HTMLElement;
-		counter.innerHTML = String(int + 1);
+	start() {
+		this.lastIndex = this.getRandom;
+		this.interval = setInterval(() => {
+			this.removeGoblinByIndex(lastIndex);
+			lastIndex = this.getRandom;
+			this.setGoblinByIndex(lastIndex)
+		}, 1000);
+	}
 
+	initListener() {
+		this.cells.parentElement.addEventListener('click', (e: MouseEvent) => {
+			const target = <HTMLElement>e.target;
+			
+			if(target.classList.contains('active')) {
+				this.score.hit()
+				this.setGoblinByIndex(this.lastIndex)
+				clearInterval(this.interval)
+				this.start();
+				return;
+			}
+			this.score.miss();
+		})
 	}
 }
 
+class ScoreBlock {
+	constructor(private shoot: HTMLElement, private missed: HTMLElement) {}
 
-const goblinClassActive = new Gobline();
-let liveGobline: any;
-const startGame = () => {
-	liveGobline = setInterval(() => {
+	hit() {
+		this.shoot.textContent = parseInt(this.shoot.textContent) + 1
+	}
 
-		goblinClassActive.setAppendGoblin = goblinClassActive.getRandom as number;
-		if (document.getElementsByClassName('active').length > 0) {
-			setTimeout(() => {
-				goblinClassActive.setRemoveGoblin = document.getElementsByClassName('active')[0] as HTMLTableCellElement;
-			}, 700);
-		}
-	}, 1700);
+	miss() {
+		this.missed.textContent = parseInt(this.shoot.textContent) + 1
+	}
 }
 
+const score = new ScoreBlock()
+const controller = new Controller(
+	document.querySelectorAll('.td'),
+	new ScoreBlock(document.querySelector('.count span:last-of-type'))
+);
 
-startGame();
+controller.start()
 
-let count = 0;
-for (let i = 0; i < goblinClassActive.tds.length; i++) {
-	goblinClassActive.tds[i].addEventListener('click', (e: Event) => {
 
-		if (e.target === document.querySelector('.active')) {
-			goblinClassActive.setLiveCounter = count;
-			count++;
-			clearInterval(liveGobline);
-			startGame()
-		}
-	});
-}
