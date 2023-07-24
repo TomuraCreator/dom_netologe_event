@@ -3,7 +3,7 @@
 class Gobline {
 	tds: HTMLCollectionOf<HTMLTableCellElement>
 	constructor() {
-		this.tds = document.getElementsByTagName('td') as HTMLCollectionOf<HTMLTableCellElement>;
+		this.tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLTableCellElement>;
 	}
 
 	get getRandom() {

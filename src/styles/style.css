@@ -2,20 +2,22 @@ body {
 	/* cursor: url('../pic/molo70t.png') 1 4, auto; */
 	height: 100vh;
 }
-td {
+.table {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.td {
 
 	border: 1px solid #cdd
 }
-td,
-td img {
+.td,
+.td img {
 	height: 122px;
 	width: 122px;
 }
-td.active {
+.td.active {
 	background: url('../pic/goblin.png') no-repeat left top;
 
 }
 
-td.active:active {
-	background-color: #cdd;
-}
