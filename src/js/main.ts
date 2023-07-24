@@ -1,9 +1,9 @@
 
 
 class Gobline {
-	tds: HTMLCollectionOf<HTMLTableCellElement>
+	tds: HTMLCollectionOf<HTMLElement>;
 	constructor() {
-		this.tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLTableCellElement>;
+		this.tds = document.getElementsByClassName('td') as HTMLCollectionOf<HTMLElement>;
 	}
 
 	get getRandom() {
@@ -16,7 +16,7 @@ class Gobline {
 		this.tds[ind].classList.add('active');
 	}
 
-	set setRemoveGoblin(td: HTMLTableCellElement) {
+	set setRemoveGoblin(td: HTMLElement) {
 		td.classList.remove('active');
 	}
 
@@ -29,32 +29,32 @@ class Gobline {
 }
 
 
-const goblin_class_active = new Gobline();
-let live_gibline: any;
-const start_game = () => {
-	live_gibline = setInterval(() => {
+const goblinClassActive = new Gobline();
+let liveGobline: any;
+const startGame = () => {
+	liveGobline = setInterval(() => {
 
-		goblin_class_active.setAppendGoblin = goblin_class_active.getRandom as number;
+		goblinClassActive.setAppendGoblin = goblinClassActive.getRandom as number;
 		if (document.getElementsByClassName('active').length > 0) {
 			setTimeout(() => {
-				goblin_class_active.setRemoveGoblin = document.getElementsByClassName('active')[0] as HTMLTableCellElement;
+				goblinClassActive.setRemoveGoblin = document.getElementsByClassName('active')[0] as HTMLTableCellElement;
 			}, 700);
 		}
 	}, 1700);
 }
 
 
-start_game();
+startGame();
 
 let count = 0;
-for (let i = 0; i < goblin_class_active.tds.length; i++) {
-	goblin_class_active.tds[i].addEventListener('click', (e: Event) => {
+for (let i = 0; i < goblinClassActive.tds.length; i++) {
+	goblinClassActive.tds[i].addEventListener('click', (e: Event) => {
 
 		if (e.target === document.querySelector('.active')) {
-			goblin_class_active.setLiveCounter = count;
+			goblinClassActive.setLiveCounter = count;
 			count++;
-			clearInterval(live_gibline);
-			start_game()
+			clearInterval(liveGobline);
+			startGame()
 		}
 	});
 }
